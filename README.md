@@ -145,7 +145,7 @@ loss = 'binary_crossentropy',
 metrics = ['accuracy'])
 ```
 - We have a 25-node hidden layer. You can tweak and try out other combinations. We are using the 'adam' optimizer and 'binary_crossentropy' loss.
-- Fitting the model with 50epochs
+## Fitting the model with 50epochs
 ```
 model.fit(X_train, y_train, epochs = 50)
 ```
@@ -167,10 +167,12 @@ for element in yp:
 print(classification_report(y_test, y_pred))
 ```
 - Based on these metrics, we see that precision & recall are less with the above model for class 1 but good for class 0.
-```
-## Saving the trained keras model in HDF5 format
-model.save('keras_neural_network_model.h5')
 
-##Downloading the saved model
+## Saving the trained keras model in HDF5 format
+```
+model.save('keras_neural_network_model.h5')
+```
+## Downloading the saved model
+```
 shutil.move('keras_neural_network_model.h5', 'keras_neural_network_model_download.h5')
 ```
