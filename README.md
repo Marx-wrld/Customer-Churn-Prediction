@@ -157,8 +157,8 @@ model.fit(X_train, y_train, epochs = 50)
 ```
 model.evaluate(X_test, y_test)
 ```
-- After testing the model gives an 80.53% accuracy
-- Printing the classification report and checking the performance.
+- After testing, the model gives an 80.53% accuracy
+### Printing the classification report and checking the performance.
 ```
 yp = model.predict(X_test)
 y_pred = []
