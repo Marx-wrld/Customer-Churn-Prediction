@@ -50,3 +50,48 @@ X['Gender'] = value
 ```
 y = data.iloc[:, len(data.columns)-1]
 ```
+## Splitting the Data into Train and Test sets
+- The function train_test_split will be used to divide our data into training and testing sets.
+```
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 42)
+```
+## Checking the lengths of train and test sets in which the general practice requires 70% to be training and 30% to be testing
+```
+len(X_train), len(X_test), len(y_train), len(y_test)
+```
+## Implementing the Random Forest Classifier Model
+- Trying the model for customers who will leave the bank.
+```
+RF = RandomForestClassifier(n_estimators = 100, max_depth = 2, random_state = 0)
+
+RF.fit(X_train, y_train)
+```
+## Saving the trained model to a file
+```
+model_filename = 'random_forest_model.pkl'
+joblib.dump(RF, model_filename)
+```
+## Downloading the model
+```
+import shutil
+shutil.move('random_forest_model.pkl', 'random_forest_model_download.pkl')
+```
+## Performance Check for Random Forest classifier
+```
+round(RF.score(X_train, y_train), 4)
+```
+- Training we get an 80.93% accuracy
+```
+round(RF.score(X_test, y_test), 4)
+```
+- Testing we get an 82.37% accuracy
+
+## Checking Feature Importance for Random Forest Classifier Model
+
+- Here is where we use eli5 to get feature importance
+```
+perm = PermutationImportance(RF, random_state = 42, n_iter = 10).fit(X, y)
+
+eli5.show_weights(perm, feature_names = X.columns.tolist())
+```
+- This now indicates that NumOfProducts(age and balance) are our Top features
