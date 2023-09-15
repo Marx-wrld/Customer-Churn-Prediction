@@ -95,3 +95,82 @@ perm = PermutationImportance(RF, random_state = 42, n_iter = 10).fit(X, y)
 eli5.show_weights(perm, feature_names = X.columns.tolist())
 ```
 - This now indicates that NumOfProducts(age and balance) are our Top features
+
+## Implementing an MLP Classifier Model
+
+- Creating another training and testing set for another model
+```
+X_train_new, X_test_new, y_train_new, y_test_new = train_test_split(X, y, test_size = 0.30, random_state = 42)
+```
+## Checking out with MLP classifier after trying out RandomForest
+```
+clf = MLPClassifier(random_state = 1, max_iter = 100).fit(X_train_new, y_train_new)
+```
+## Saving the trained model to a file
+```
+model_filename = 'MlpClassifier_model.pkl'
+joblib.dump(clf, model_filename)
+```
+## Downloading the model
+```
+import shutil
+shutil.move('MlpClassifier_model.pkl', 'MlpClassifierModel_download.pkl')
+```
+## Performance check for MLP Classifier model
+```
+clf.score(X_train, y_train_new)
+```
+```
+clf.score(X_test_new, y_test_new)
+```
+- Getting a 73.82% training accuracy and 73.30% testing accuracy
+
+## Checking Feature Importance for MLP Classifier Model
+```
+perm = PermutationImportance(clf, random_state = 42, n_iter = 10).fit(X, y)
+
+eli5.show_weights(perm, feature_names = X.columns.tolist())
+```
+- This model indicates that Balance, Age and IsActiveMember are our top features
+## Implementing a NeuralNetwork Model and Checking the Importance
+- Trying the Neural Network Model after trying out the Random forest and MLP classifiers and for that we'll use keras.
+```
+model = keras.Sequential([
+    keras.layers.Dense(10, input_shape = (10,), activation = 'relu'),
+    keras.layers.Dense(25, activation = 'relu'),
+    keras.layers.Dense(1, activation = 'sigmoid')
+])
+model.compile(optimizer = 'adam',
+loss = 'binary_crossentropy',
+metrics = ['accuracy'])
+```
+- We have a 25-node hidden layer. You can tweak and try out other combinations. We are using the 'adam' optimizer and 'binary_crossentropy' loss.
+- Fitting the model with 50epochs
+```
+model.fit(X_train, y_train, epochs = 50)
+```
+- After training the 50 epochs, I got a 79.24% accuracy.
+```
+model.evaluate(X_test, y_test)
+```
+- After testing the model gives an 80.53% accuracy
+- Printing the classification report and checking the performance.
+```
+yp = model.predict(X_test)
+y_pred = []
+for element in yp:
+    if element > 0.5:
+        y_pred.append(1)
+    else:
+        y_pred.append(0)
+
+print(classification_report(y_test, y_pred))
+```
+- Based on these metrics, we see that precision & recall are less with the above model for class 1 but good for class 0.
+```
+## Saving the trained keras model in HDF5 format
+model.save('keras_neural_network_model.h5')
+
+##Downloading the saved model
+shutil.move('keras_neural_network_model.h5', 'keras_neural_network_model_download.h5')
+```
