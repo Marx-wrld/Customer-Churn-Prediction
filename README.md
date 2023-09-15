@@ -1,8 +1,8 @@
 # Customer-Churn-Prediction
 ML model that can predict if a customer is going to leave a bank or not. I've used the Random Forest classifier, MLP classifier, and Neural Networks model then got a performance check for each model.
 
-#### Imagine working with The World Bank. They're really keen on figuring out how many customers might decide to leave them in the coming months. Luckily, they've got a bunch of past data about when customers have left before, as well as info about who these customers are, what they've bought, and other things like that.
-#### So, if you were in charge of predicting customer churn how would you go about using machine learning to make a good guess about which customers might leave? Like, what steps would you take to create an ML model that can predict if someone's going to leave or not?
+##### Imagine working with The World Bank. They're really keen on figuring out how many customers might decide to leave them in the coming months. Luckily, they've got a bunch of past data about when customers have left before, as well as info about who these customers are, what they've bought, and other things like that.
+##### So, if you were in charge of predicting customer churn how would you go about using machine learning to make a good guess about which customers might leave? Like, what steps would you take to create an ML model that can predict if someone's going to leave or not?
 
 ### Installing Required Libraries
 
