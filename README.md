@@ -132,7 +132,7 @@ perm = PermutationImportance(clf, random_state = 42, n_iter = 10).fit(X, y)
 eli5.show_weights(perm, feature_names = X.columns.tolist())
 ```
 - This model indicates that Balance, Age and IsActiveMember are our top features
-### Implementing a NeuralNetwork Model and Checking the Importance
+## Implementing a NeuralNetwork Model and Checking the Importance
 - Trying the Neural Network Model after trying out the Random forest and MLP classifiers and for that we'll use keras.
 ```
 model = keras.Sequential([
